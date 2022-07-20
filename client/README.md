@@ -35,4 +35,12 @@ useRef is a hook that lets you access the DOM node of a component. It helps in a
 
 onControlled is a hook that lets you control the value of an input field.
 
+In the React rendering lifecycle, the value attribute on form elements will override the value in the DOM. With an uncontrolled component, you often want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a defaultValue attribute instead of value. Changing the value of defaultValue attribute after a component has mounted will not cause any update of the value in the DOM.
+
 - value = {userRegisterForm.[key]} in form is controlled by DOM itself
+
+# useRef()
+
+- The useRef Hook allows you to persist values between renders.
+- It can be used to store a mutable value that does not cause a re-render when updated.
+- It can be used to access a DOM element directly.
