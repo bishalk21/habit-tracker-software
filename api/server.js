@@ -1,7 +1,14 @@
 import express from "express";
+import cors from "cors";
+import ConnectDB from "./src/config/ConnectDB.js";
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+
 const PORT = 8000;
+
+ConnectDB();
 
 app.use("/", (req, res) => {
   // this is the root path

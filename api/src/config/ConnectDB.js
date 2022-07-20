@@ -1,7 +1,6 @@
-import React from "react";
 import mongoose from "mongoose";
 
-export const ConnectDB = () => {
+const ConnectDB = () => {
   try {
     const MONGO_CLIENT = "mongodb://localhost/habit-tracker";
     const con = mongoose.connect(MONGO_CLIENT);
@@ -12,3 +11,5 @@ export const ConnectDB = () => {
     console.log(error);
   }
 };
+
+export default ConnectDB;
