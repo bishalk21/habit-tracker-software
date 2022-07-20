@@ -31,6 +31,8 @@ react-toastify is a library that allows you to use toast notifications in your r
 
 useRef is a hook that lets you access the DOM node of a component. It helps in accessing data of a component.
 
-# onControlled input field
+# Uncontrolled input field
 
 onControlled is a hook that lets you control the value of an input field.
+
+- value = {userRegisterForm.[key]} in form is controlled by DOM itself

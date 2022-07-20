@@ -40,6 +40,7 @@ export const Register = () => {
                 placeholder="Enter first name"
                 required
                 onChange={handleOnChange}
+                value={userRegisterForm.firstName} // uncontrolled input field
               />
             </Form.Group>
 
@@ -51,6 +52,7 @@ export const Register = () => {
                 placeholder="Enter last name"
                 required
                 onChange={handleOnChange}
+                value={userRegisterForm.lastName}
               />
             </Form.Group>
 
@@ -62,6 +64,7 @@ export const Register = () => {
                 placeholder="Enter email"
                 required
                 onChange={handleOnChange}
+                value={userRegisterForm.email}
               />
             </Form.Group>
 
@@ -73,6 +76,7 @@ export const Register = () => {
                 placeholder="Password"
                 required
                 onChange={handleOnChange}
+                value={userRegisterForm.password}
               />
             </Form.Group>
 
@@ -84,6 +88,7 @@ export const Register = () => {
                 placeholder="Confirm password"
                 required
                 onChange={handleOnChange}
+                value={userRegisterForm.confirmPassword}
               />
             </Form.Group>
 
