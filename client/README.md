@@ -6,6 +6,7 @@
 - clean the app.js, app.css and logo.png files
 - install react-router-dom, react-bootstrap
 - integrate font awesome CDN in index.html
+- integrate bootstrap css in index.js
 
 # React-Bootstrap
 
