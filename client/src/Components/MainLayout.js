@@ -1,10 +1,12 @@
 import React from "react";
-import Header from "./Header";
+import { Header } from "./Header";
 
-export const MainLayout = () => {
+export const MainLayout = ({ children }) => {
   return (
     <div>
       <Header></Header>
+
+      {children}
     </div>
   );
 };
