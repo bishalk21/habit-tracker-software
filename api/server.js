@@ -15,3 +15,21 @@ app.use("/", (req, res) => {
     console.log(error);
   }
 });
+
+app.use("/", (error, req, res, next) => {
+  // error
+  try {
+    res.status(error.status || 500);
+    res.send({
+      status: "error",
+      message: error.message,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.listen(PORT, (error) => {
+  error && console.log(error);
+  console.log(`Console is running at http://localhost:${PORT}`);
+});
