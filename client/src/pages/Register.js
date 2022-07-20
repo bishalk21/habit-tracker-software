@@ -52,6 +52,9 @@ export const Register = () => {
             Register
           </Button>
         </Form>
+        <div className="text-end mt-3">
+          Already have an account? <a href="/login">Login</a>
+        </div>
       </div>
     </div>
   );

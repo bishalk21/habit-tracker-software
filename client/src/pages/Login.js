@@ -26,6 +26,9 @@ export const Login = () => {
             Login
           </Button>
         </Form>
+        <div className="text-center mt-3">
+          Are you new User? <a href="/register">Register</a>
+        </div>
       </div>
     </div>
   );
