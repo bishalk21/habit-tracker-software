@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 export const Register = () => {
   return (
-    <div className="register-page d-flex justify-content-center mt-1">
+    <div className="register-page landing d-flex justify-content-center mt-1">
       <div className="register-form border bg-light shadow-lg p-5">
         <h3>Register as a new user</h3>
         <Form>
