@@ -1,8 +1,24 @@
+import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { MainLayout } from "../Components/MainLayout";
 
+let initialState = {
+  FirstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 export const Register = () => {
+  const [userRegisterForm, setUserRegisterForm] = useState({}); // Initialize form data with empty object // userRegisterForm is an object // setUserRegisterForm is a function
+
+  const handleOnChange = (e) => {
+    // e is the event that is passed in as an argument
+    const { name, value } = e.target;
+    setUserRegisterForm({ ...userRegisterForm, [name]: value }); // Set the form data to the new value // userRegisterForm is an object // setUserRegisterForm is a function
+  };
   return (
     <MainLayout>
       <div className="register-page landing d-flex justify-content-center mt-1">
@@ -15,6 +31,8 @@ export const Register = () => {
                 name="firstName"
                 type="email"
                 placeholder="Enter first name"
+                required
+                onChange={handleOnChange}
               />
             </Form.Group>
 
@@ -24,6 +42,8 @@ export const Register = () => {
                 name="lastName"
                 type="email"
                 placeholder="Enter last name"
+                required
+                onChange={handleOnChange}
               />
             </Form.Group>
 
@@ -33,6 +53,8 @@ export const Register = () => {
                 name="email"
                 type="email"
                 placeholder="Enter email"
+                required
+                onChange={handleOnChange}
               />
             </Form.Group>
 
@@ -42,6 +64,8 @@ export const Register = () => {
                 name="password"
                 type="password"
                 placeholder="Password"
+                required
+                onChange={handleOnChange}
               />
             </Form.Group>
 
@@ -51,6 +75,8 @@ export const Register = () => {
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm password"
+                required
+                onChange={handleOnChange}
               />
             </Form.Group>
 
