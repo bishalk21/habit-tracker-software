@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { MainLayout } from "../Components/MainLayout";
 
 let initialState = {
-  FirstName: "",
+  firstName: "",
   lastName: "",
   email: "",
   password: "",
@@ -19,17 +19,24 @@ export const Register = () => {
     const { name, value } = e.target;
     setUserRegisterForm({ ...userRegisterForm, [name]: value }); // Set the form data to the new value // userRegisterForm is an object // setUserRegisterForm is a function
   };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log(userRegisterForm);
+    setUserRegisterForm(initialState);
+  };
+
   return (
     <MainLayout>
       <div className="register-page landing d-flex justify-content-center mt-1">
         <div className="register-form border bg-light shadow-lg p-5">
           <h3>Register as a new user</h3>
-          <Form>
+          <Form onSubmit={handleOnSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 name="firstName"
-                type="email"
+                type="text"
                 placeholder="Enter first name"
                 required
                 onChange={handleOnChange}
@@ -40,7 +47,7 @@ export const Register = () => {
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 name="lastName"
-                type="email"
+                type="text"
                 placeholder="Enter last name"
                 required
                 onChange={handleOnChange}
@@ -80,7 +87,7 @@ export const Register = () => {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" value="Register">
               Register
             </Button>
           </Form>
