@@ -1,6 +1,6 @@
 import express from "express";
 
-import { addUser } from "../model/UserModel";
+import { addUser } from "../model/UserModel.js";
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -22,3 +22,5 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
+export default router;

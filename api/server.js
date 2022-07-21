@@ -10,7 +10,10 @@ const PORT = 8000;
 
 ConnectDB();
 
-app.use("/", (req, res) => {
+import userRouter from "./src/routers/userRouter.js";
+app.use("/api/v1/user/", userRouter);
+
+app.use("/api/v1/user/", () => {
   // this is the root path
   try {
     res.send({

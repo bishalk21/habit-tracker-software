@@ -2,4 +2,12 @@
 GET http://localhost:8000/
 
 ### post new users
-POST http://localhost:8000/
+POST http://localhost:8000/api/v1/user/
+Content-Type: application/json
+
+{
+   "firstName" : "Bishal",
+    "lastName" : "Karki",
+    "email" : "asd@g.com",
+    "password" : "123456"
+}

@@ -96,3 +96,10 @@
 - npm install toastify-js
 - import toastify-js to App.js
 - import toastify-js to register.js to use toastify-js (toast only) to show the toast message
+
+# created alert on form submit
+
+# User login on the client side
+
+- get methodin userRouter.js
+- get user in usermodel and pass the user data to the userRouter.js
