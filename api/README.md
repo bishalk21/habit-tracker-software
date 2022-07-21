@@ -62,6 +62,7 @@
 
 - Schema is a class that defines the structure of the data that will be stored in the database.
 - create schema call userSchema
+- inside new schema, define the properties of the user
 - - made a post request in the router with the data in the req.body
 
 # Model
