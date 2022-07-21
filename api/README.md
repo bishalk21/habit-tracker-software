@@ -63,10 +63,14 @@
 - Schema is a class that defines the structure of the data that will be stored in the database.
 - create schema call userSchema
 - inside new schema, define the properties of the user
-- - made a post request in the router with the data in the req.body
+- status is a string that can be either "active" or "inactive" // this is to check if the user is active or not or if the user is valid or not
+- made a post request in the router with the data in the req.body
+- indexing should be done on the status property
 
 # Model
 
+- Model is for CRUD operations on the database.
+- Model is a class that provides the functionality of the database.
 - Model is a class that defines the behavior of the data that will be stored in the database.
 - create model call User with queries
 - call the queries and pass the data to store data in the database
@@ -77,3 +81,18 @@
 - connect to mongodb
 - mongoose.connect('mongodb://localhost:27017/', { useNewUrlParser: true });
 - create a variable to store the connection
+
+# Axios
+
+- Axios is a promise based HTTP client for the browser and node.js.
+- npm install axios
+- make helper folder in client-side and import axios in axiosHelper.js
+- import axios
+- make rootUrl variable in axiosHelper.js
+- import axiosHelper.js to register.js to use axios and update the handleOnSubmit function
+
+# Toastify
+
+- npm install toastify-js
+- import toastify-js to App.js
+- import toastify-js to register.js to use toastify-js (toast only) to show the toast message
