@@ -17,3 +17,18 @@ export const postNewUser = async (obj) => {
     };
   }
 };
+
+//login user
+export const loginUser = async (obj) => {
+  // user is an object
+  try {
+    const response = await axios.post(UserP + "login", obj); // login is the endpoint // obj actually is for the user object
+    console.log(response);
+    return response.data; // data is actually the user object
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};

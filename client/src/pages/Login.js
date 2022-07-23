@@ -1,17 +1,29 @@
 import React, { useRef } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { MainLayout } from "../Components/MainLayout";
+import { loginUser } from "../helpers/axiosHelper";
 
 export const Login = () => {
   const emailRef = useRef(); // creates a refrence
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     console.log(email, password);
+
+    const { status, message, user } = await loginUser({ email, password });
+    // console.log(status, message, user);
+    toast[status](message);
+    if (status === "success") {
+      window.sessionStorage.setItem("user", JSON.stringify(user));
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -44,7 +56,7 @@ export const Login = () => {
             </Button>
           </Form>
           <div className="text-center mt-3">
-            Are you new User? <a href="/register">Register</a>
+            Are you new User? <Link to="/register">Register</Link>
           </div>
         </div>
       </div>
