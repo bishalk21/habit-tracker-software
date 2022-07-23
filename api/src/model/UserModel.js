@@ -6,3 +6,8 @@ export const addUser = async (users) => {
   // users is an object
   return await UserSchema(users).save();
 };
+
+// filter out the user from the database
+export const getUser = async (filter) => {
+  return await UsrSchema.findOne(filter);
+};
