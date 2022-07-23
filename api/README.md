@@ -103,3 +103,9 @@
 
 - get methodin userRouter.js
 - get user in usermodel and pass the user data to the userRouter.js
+
+# local storage
+
+- arguments are key and value;
+
+# session storage

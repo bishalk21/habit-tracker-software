@@ -13,6 +13,7 @@ let initialState = {
 
 export const Register = () => {
   const [userRegisterForm, setUserRegisterForm] = useState({}); // Initialize form data with empty object // userRegisterForm is an object // setUserRegisterForm is a function
+  const [resp, setResp] = useState({}); // Initialize response data with empty object // resp is an object // setResp is a function
 
   const handleOnChange = (e) => {
     // e is the event that is passed in as an argument
@@ -23,6 +24,12 @@ export const Register = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     console.log(userRegisterForm);
+
+    const { confirmPassword, ...userData } = userRegisterForm; // userData is an object // user is an object
+    if (confirmPassword !== userData.password) {
+      return alert("Passwords do not match"); // If the passwords do not match, return an alert
+    }
+
     setUserRegisterForm(initialState);
   };
 
