@@ -13,7 +13,7 @@ ConnectDB();
 import userRouter from "./src/routers/userRouter.js";
 app.use("/api/v1/user/", userRouter);
 
-app.use("/api/v1/user/", () => {
+app.use("/", (req, res) => {
   // this is the root path
   try {
     res.send({

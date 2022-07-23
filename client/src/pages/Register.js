@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { MainLayout } from "../Components/MainLayout";
+import { postNewUser } from "../helpers/axiosHelper";
+import { toast } from "react-toastify";
 
 let initialState = {
   firstName: "",
@@ -21,7 +23,7 @@ export const Register = () => {
     setUserRegisterForm({ ...userRegisterForm, [name]: value }); // Set the form data to the new value // userRegisterForm is an object // setUserRegisterForm is a function
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(userRegisterForm);
 
@@ -30,7 +32,11 @@ export const Register = () => {
       return alert("Passwords do not match"); // If the passwords do not match, return an alert
     }
 
-    setUserRegisterForm(initialState);
+    const { status, message } = await postNewUser(userData);
+    // status is a string // message is a string
+    toast[status](message); // Toast is a function // status is a string // message is a string
+    status === "success" && setUserRegisterForm(initialState);
+    setResp({ status, message });
   };
 
   return (
@@ -39,6 +45,11 @@ export const Register = () => {
         <div className="register-form border bg-light shadow-lg p-5">
           <h3>Register as a new user</h3>
           <Form onSubmit={handleOnSubmit}>
+            {resp.message && (
+              <Alert variant={resp.status === "success" ? "success" : "danger"}>
+                {resp.message}
+              </Alert>
+            )}
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>First Name</Form.Label>
               <Form.Control

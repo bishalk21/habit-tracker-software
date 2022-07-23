@@ -11,3 +11,13 @@ Content-Type: application/json
     "email" : "asd@g.com",
     "password" : "123456"
 }
+
+### post new users
+POST http://localhost:8000/api/v1/user/login/
+Content-Type: application/json
+
+{
+    "email" : "asd@g.com",
+    "password" : "123456"
+}
+
