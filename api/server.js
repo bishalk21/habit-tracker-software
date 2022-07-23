@@ -11,7 +11,7 @@ const PORT = 8000;
 ConnectDB();
 
 import userRouter from "./src/routers/userRouter.js";
-app.use("/api/v1/user/", userRouter);
+app.use("/api/v1/user", userRouter);
 
 app.use("/", (req, res) => {
   // this is the root path
@@ -26,7 +26,7 @@ app.use("/", (req, res) => {
   }
 });
 
-app.use("/", (error, req, res, next) => {
+app.use((error, req, res, next) => {
   // error
   try {
     res.status(error.status || 500);

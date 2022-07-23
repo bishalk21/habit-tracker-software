@@ -6,7 +6,7 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.post("/", async (req, res, next) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     // const user = await addUser(req.body);
     // console.log(user);
     const result = await addUser(req.body);
@@ -14,11 +14,12 @@ router.post("/", async (req, res, next) => {
       ? res.json({
           status: "success",
           message: "User added successfully",
-          user,
+          result,
         })
       : res.json({
           status: "error",
           message: "User not added",
+          result,
         });
   } catch (error) {
     if (error.message.includes("E11000 duplicate key error")) {

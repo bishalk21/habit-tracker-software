@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { MainLayout } from "../Components/MainLayout";
 import { postNewUser } from "../helpers/axiosHelper";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 let initialState = {
   firstName: "",
@@ -115,7 +116,7 @@ export const Register = () => {
             </Button>
           </Form>
           <div className="text-end mt-3">
-            Already have an account? <a href="/login">Login</a>
+            Already have an account? <Link to="/login">Login</Link>
           </div>
         </div>
       </div>
