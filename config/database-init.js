@@ -1,8 +1,9 @@
-import pool from './database.js';
+import pool from "./database.js";
 
 // Create dreams table if it doesn't exist
 export async function initDatabase() {
   const client = await pool.connect();
+  console.log("Initializing database...");
   try {
     await client.query(`
       CREATE TABLE IF NOT EXISTS dreams (
@@ -12,12 +13,12 @@ export async function initDatabase() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-    console.log('Database initialized');
+    console.log("Database initialized");
   } catch (error) {
-    console.error('Database initialization error:', error);
+    console.error("Database initialization error:", error);
   } finally {
     client.release();
-  } 
+  }
 }
 
 export default pool;
