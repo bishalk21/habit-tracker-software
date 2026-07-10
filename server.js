@@ -43,16 +43,54 @@ app.get("/health", async (req, res) => {
   }
 });
 
+// SHUTDOWN HANDLER
+app.get("/shutdown", async (req, res) => {
+  try {
+    console.log("=== Manual shutdown initiated ===");
+    res.status(200).json({
+      status: "success",
+      message: "Server is shutting down...",
+    });
+    setTimeout(() => {
+      process.kill(process.pid, "SIGTERM"); // Graceful shutdown
+    }, 1000); // Delay to allow response to be sent
+  } catch (error) {
+    console.error("Shutdown failed:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to shutdown server",
+    });
+  }
+});
+
 // API Routes
 app.use("/api/dreams", dreamsRouter);
 
 // Initialize database then start server
+let server;
 initDatabase()
   .then(() => {
-    app.listen(PORT, () => {
+    server = app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
   })
   .catch((error) => {
     console.error("Failed to initialize database:", error);
+    process.exit(1); // Exit with failure
   });
+
+process.on("SIGTERM", gracefulShutDown);
+async function gracefulShutDown() {
+  console.log("SIGTERM signal received, shutting down gracefully.");
+  try {
+    server.close(() => {
+      console.log("HTTP server closed.");
+    });
+    await pool.end();
+    console.log("Database connection pool closed.");
+    process.exit(0);
+  } catch (error) {
+    console.error("Error during server shutdown:", error);
+    process.exit(1);
+  }
+}
