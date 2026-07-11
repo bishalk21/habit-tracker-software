@@ -5,6 +5,12 @@ import { dirname, join } from "path";
 import helmet from "helmet";
 import pool, { initDatabase } from "./config/database-init.js";
 import dreamsRouter from "./routes/dreams.js";
+import {
+  callHuggingFaceFunction,
+  chatCompletions,
+  classifyText,
+  summarizeText,
+} from "./routes/huggingFace.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -42,6 +48,28 @@ app.get("/health", async (req, res) => {
     });
   }
 });
+
+app.get("/api/hfFunction", async (req, res) => {
+  try {
+    const text = await callHuggingFaceFunction();
+    res.status(200).json({
+      status: "success",
+      message: "Hugging Face function executed successfully",
+      data: text,
+    });
+  } catch (error) {
+    console.error("Error calling Hugging Face function:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to call Hugging Face function",
+    });
+  }
+});
+
+app.post("/api/summarize", summarizeText);
+app.post("/api/classifyText", classifyText);
+app.post("/api/chat", chatCompletions);
+// app.get("/api/chat", chatCompletions);
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {

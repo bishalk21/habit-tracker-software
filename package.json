@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.15.0",
+    "@huggingface/inference": "^4.13.23",
     "dotenv": "^17.4.2",
     "express": "^4.18.2",
     "helmet": "^8.1.0",
