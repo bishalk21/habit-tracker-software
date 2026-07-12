@@ -110,3 +110,37 @@ export async function chatCompletions(req, res) {
     });
   }
 }
+
+export async function generateImage(req, res) {
+  // const {userPrompt} = req.body;
+  try {
+    const imageBlob = await client.textToImage({
+      provider: "hf-inference",
+      model: "black-forest-labs/FLUX.1-schnell",
+      inputs:
+        "A futuristic Nepal, cyberpunk cityscape with neon lights, flying cars, and towering skyscrapers, in the style of Blade Runner and Tron, with a vibrant color palette and a sense of depth and scale.",
+      parameters: {
+        // width: 512,
+        // height: 512,
+        num_inference_steps: 5,
+      },
+    });
+
+    // convert blob -> arrayBuffer -> buffer -> base64
+    const arrayBuffer = await imageBlob.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const b64_json = buffer.toString("base64");
+
+    res.status(200).json({
+      status: "success",
+      message: "Image generated successfully",
+      data: b64_json,
+    });
+  } catch (error) {
+    console.error("Error occurred while generating image:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to generate image",
+    });
+  }
+}

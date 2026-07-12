@@ -44,6 +44,27 @@ generateTextBtn.addEventListener("click", async () => {
   }
 });
 
+// generate image
+const generateImageBtn = document.getElementById("generate-image");
+let newImage = document.getElementById("new-image");
+generateImageBtn.addEventListener("click", async () => {
+  console.log("Generate Image button clicked");
+  try {
+    const response = await fetch("http://localhost:3001/api/generate-image");
+    if (!response.ok) {
+      throw new Error("Failed to generate image");
+      return;
+    }
+    const data = await response.json();
+    console.log("Generated image response:", data);
+    const imageUrl = `data:image/jpeg;base64,${data.data}`;
+    newImage.src = imageUrl;
+  } catch (error) {
+    console.error("Error generating image:", error);
+    alert("Error generating image. Check console for details.");
+  }
+});
+
 // Load dreams on page load
 document.addEventListener("DOMContentLoaded", loadDreams);
 
@@ -240,8 +261,8 @@ function showErrorMessage(message) {
 }
 
 // Clear error message
+const errorContainer = document.getElementById("errorContainer");
 function clearErrorMessage() {
-  const errorContainer = document.getElementById("errorContainer");
   if (errorContainer) {
     errorContainer.style.display = "none";
     errorContainer.innerHTML = "";

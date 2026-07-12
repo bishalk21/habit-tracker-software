@@ -9,6 +9,7 @@ import {
   callHuggingFaceFunction,
   chatCompletions,
   classifyText,
+  generateImage,
   summarizeText,
 } from "./routes/huggingFace.js";
 
@@ -70,6 +71,7 @@ app.post("/api/summarize", summarizeText);
 app.post("/api/classifyText", classifyText);
 app.post("/api/chat", chatCompletions);
 // app.get("/api/chat", chatCompletions);
+app.get("/api/generate-image", generateImage);
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {
