@@ -1,23 +1,66 @@
 import { pipeline } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2";
-// import { pipeline } from "@xenova/transformers";
-// import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.1";
-
 const status = document.getElementById("status");
 const image = document.getElementById("image");
+const detectObjectsButton = document.getElementById("detect-objects");
+const imageContainer = document.getElementById("image-container");
 
 status.textContent = "Loading model...";
 
 // load the model
 const detector = await pipeline("object-detection", "Xenova/yolos-tiny");
-status.textContent = "Model loaded. Detecting objects...";
 
-const detectedObjects = await detector(image.src, {
-  threshold: 0.5, // Set a threshold for detection confidence
-  percentage: true, // Return percentage confidence instead of raw scores
-});
-detectedObjects.forEach((obj) => {
-  console.log(obj);
-});
+detectObjectsButton.addEventListener("click", detectAndDrawObjects);
+detectObjectsButton.disabled = false;
+
+async function detectAndDrawObjects() {
+  // Detect Objects
+  status.textContent = "Model loaded. Detecting objects...";
+
+  const detectedObjects = await detector(image.src, {
+    threshold: 0.95,
+    percentage: true,
+  });
+
+  // Draw Detected Objects
+  status.textContent = "Drawing...";
+  detectedObjects.forEach((obj) => {
+    drawObjectBox(obj);
+  });
+
+  status.textContent = "Done!";
+}
+
+function drawObjectBox(detectedObject) {
+  const { label, score, box } = detectedObject;
+  const { xmax, xmin, ymax, ymin } = box;
+
+  // Generate a random color for the box
+  const color =
+    "#" +
+    Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, 0);
+
+  // Draw the box
+  const boxElement = document.createElement("div");
+  boxElement.className = "bounding-box";
+  Object.assign(boxElement.style, {
+    borderColor: color,
+    left: 100 * xmin + "%",
+    top: 100 * ymin + "%",
+    width: 100 * (xmax - xmin) + "%",
+    height: 100 * (ymax - ymin) + "%",
+  });
+
+  // Draw label
+  const labelElement = document.createElement("span");
+  labelElement.textContent = `${label}: ${Math.floor(score * 100)}%`;
+  labelElement.className = "bounding-box-label";
+  labelElement.style.backgroundColor = color;
+
+  boxElement.appendChild(labelElement);
+  imageContainer.appendChild(boxElement);
+}
 
 status.textContent = "Done!";
 // DOM elements

@@ -19,33 +19,43 @@ const __dirname = dirname(__filename);
 const app = express();
 // app.use(helmet());
 
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         "default-src": ["'self'"],
-//         "font-src": ["'self'"],
-//         "img-src": ["'self'"],
-//         "script-src": ["'self'", "https://cdn.jsdelivr.net"],
-//         "style-src": ["'self'"],
-//         "frame-src": ["'self'"],
-//         "connect-src": ["'self'", "https://huggingface.co", "https://*.hf.co"],
-//       },
-//     },
-//   }),
-// );
-
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' https://jsdelivr.net; style-src 'self'; frame-src 'self'",
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net",
+      "style-src 'self'",
+      "img-src 'self' data: blob:",
+      "font-src 'self'",
+      "connect-src 'self' https://huggingface.co https://*.hf.co https://cdn.jsdelivr.net",
+      "worker-src 'self' blob:",
+      "frame-src 'self'",
+    ].join("; "),
   );
+
   next();
 });
-
 // Add security headers
 if (process.env.NODE_ENV === "production") {
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-eval'", "https://cdn.jsdelivr.net"],
+          connectSrc: [
+            "'self'",
+            "https://cdn.jsdelivr.net",
+            "https://huggingface.co",
+            "https://*.hf.co",
+          ],
+          imgSrc: ["'self'", "data:", "blob:"],
+          workerSrc: ["'self'", "blob:"],
+        },
+      },
+    }),
+  );
 }
 
 const PORT = process.env.PORT || 3001;
