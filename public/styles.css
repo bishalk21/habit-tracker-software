@@ -40,6 +40,33 @@ body {
   background-clip: padding-box;
 }
 
+#image-container {
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+
+#image-container > img {
+  width: 100%;
+}
+
+.bounding-box {
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.bounding-box-label {
+  color: white;
+  position: absolute;
+  font-size: 10px;
+  margin-top: -16px;
+  margin-left: -2px;
+  padding: 1px;
+  width: max-content;
+}
+
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;

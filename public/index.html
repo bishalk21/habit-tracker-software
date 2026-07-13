@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Dream Catcher</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,6 +24,13 @@
         </div>
         <p class="subtitle">Record your dreams and discover their meanings.</p>
       </header>
+
+      <section class="container">
+        <p id="status"></p>
+        <div id="image-container">
+          <img src="road.jpeg" alt="" id="image" />
+        </div>
+      </section>
 
       <section class="hf-token">
         <button id="create-hf-token">Create HF Token</button>
@@ -66,6 +74,6 @@
       <p>&copy; DreamCatcher. All rights reserved.</p>
     </footer>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>

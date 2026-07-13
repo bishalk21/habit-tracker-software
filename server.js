@@ -17,6 +17,31 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+// app.use(helmet());
+
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         "default-src": ["'self'"],
+//         "font-src": ["'self'"],
+//         "img-src": ["'self'"],
+//         "script-src": ["'self'", "https://cdn.jsdelivr.net"],
+//         "style-src": ["'self'"],
+//         "frame-src": ["'self'"],
+//         "connect-src": ["'self'", "https://huggingface.co", "https://*.hf.co"],
+//       },
+//     },
+//   }),
+// );
+
+app.use(function (req, res, next) {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' https://jsdelivr.net; style-src 'self'; frame-src 'self'",
+  );
+  next();
+});
 
 // Add security headers
 if (process.env.NODE_ENV === "production") {
