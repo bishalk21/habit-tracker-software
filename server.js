@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import ollama from "ollama";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import helmet from "helmet";
@@ -63,6 +64,30 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(express.json());
 app.use(express.static(join(__dirname, "public")));
+
+// ollama practice
+app.get("/chat-ollama", async (req, res) => {
+  const query = req.query.q;
+  if (!query) {
+    return res
+      .status(400)
+      .json({
+        status: "error",
+        message:
+          "Ask something via the 'q' query parameter, e.g., /chat-ollama?q=Hello",
+      });
+  } else {
+    const response = await ollama.chat({
+      model: "mistral",
+      messages: [{ role: "user", content: query }],
+    });
+    res.status(200).json({
+      status: "success",
+      message: "Ollama chat executed successfully",
+      data: response.message.content,
+    });
+  }
+});
 
 // health check endpoint
 app.get("/health", async (req, res) => {
