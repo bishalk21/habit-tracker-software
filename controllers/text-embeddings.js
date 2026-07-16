@@ -1,5 +1,7 @@
 import { openai } from "../utils/ai-openai.js";
 // import { AutoTokenizer } from "@huggingface/transformers";
+import podcasts from "../mocks/content.js";
+import { supabase } from "../config/supabaseConfig.js";
 
 export async function textEmbeddings(req, res) {
   try {
@@ -61,6 +63,46 @@ export async function pairTextWithEmbedding(req, res) {
     res.status(200).json({
       status: "success",
       data: embedding,
+    });
+  } catch (error) {
+    console.error("Error fetching embeddings:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to fetch embeddings",
+    });
+  }
+}
+
+export async function podcastsTextEmbeddings(req, res) {
+  try {
+    const data = await Promise.all(
+      podcasts.map(async (text) => {
+        const embeddingResponse = await openai.embeddings.create({
+          model: "text-embedding-ada-002",
+          input: text.toString(),
+        });
+        return {
+          content: text,
+          embedding: embeddingResponse.data[0].embedding,
+        };
+      }),
+    );
+    // const embedding = await Promise.all(embeddingPromises);
+
+    // insert the embeddings into the database
+    const { error } = await supabase.from("documents").insert(data);
+    if (error) {
+      console.error("Error inserting embeddings into the database:", error);
+      return res.status(500).json({
+        status: "error",
+        message: "Failed to insert embeddings into the database",
+      });
+    }
+    console.log("Embeddings inserted into the database successfully");
+
+    res.status(200).json({
+      status: "success",
+      data: data,
     });
   } catch (error) {
     console.error("Error fetching embeddings:", error);

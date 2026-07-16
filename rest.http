@@ -51,3 +51,6 @@ Content-Type: application/json
 {
   "text": "The quick brown fox jumps over the lazy dog."
 }
+
+### text embeddings for podcasts
+GET http://localhost:3001/api/embeddings/podcasts

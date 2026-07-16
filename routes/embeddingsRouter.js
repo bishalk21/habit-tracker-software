@@ -1,6 +1,7 @@
 import express from "express";
 import {
   pairTextWithEmbedding,
+  podcastsTextEmbeddings,
   textEmbeddings,
 } from "../controllers/text-embeddings.js";
 const router = express.Router();
@@ -15,5 +16,6 @@ router.get("/", (req, res) => {
 
 router.post("/text", textEmbeddings);
 router.get("/text-pair", pairTextWithEmbedding);
+router.get("/podcasts", podcastsTextEmbeddings);
 
 export default router;
