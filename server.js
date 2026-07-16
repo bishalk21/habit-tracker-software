@@ -13,6 +13,8 @@ import {
   generateImage,
   summarizeText,
 } from "./routes/huggingFace.js";
+import chatOllamaRouter from "./routes/chatOllamaRouter.js";
+import embeddingsRouter from "./routes/embeddingsRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -65,30 +67,6 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.static(join(__dirname, "public")));
 
-// ollama practice
-app.get("/chat-ollama", async (req, res) => {
-  const query = req.query.q;
-  if (!query) {
-    return res
-      .status(400)
-      .json({
-        status: "error",
-        message:
-          "Ask something via the 'q' query parameter, e.g., /chat-ollama?q=Hello",
-      });
-  } else {
-    const response = await ollama.chat({
-      model: "mistral",
-      messages: [{ role: "user", content: query }],
-    });
-    res.status(200).json({
-      status: "success",
-      message: "Ollama chat executed successfully",
-      data: response.message.content,
-    });
-  }
-});
-
 // health check endpoint
 app.get("/health", async (req, res) => {
   try {
@@ -132,6 +110,9 @@ app.post("/api/classifyText", classifyText);
 app.post("/api/chat", chatCompletions);
 // app.get("/api/chat", chatCompletions);
 app.get("/api/generate-image", generateImage);
+// ollama practice
+app.use("/api/ollama", chatOllamaRouter);
+app.use("/api/embeddings", embeddingsRouter);
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {
