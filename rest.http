@@ -57,3 +57,6 @@ GET http://localhost:3001/api/embeddings/podcasts
 
 ### semantic search
 GET http://localhost:3001/api/embeddings/semantic-search
+
+### Conversational response
+GET http://localhost:3001/api/embeddings/chat-response

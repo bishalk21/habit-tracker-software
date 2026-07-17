@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  generateChatResponse,
   pairTextWithEmbedding,
   podcastsTextEmbeddings,
   semanticSearch,
@@ -19,5 +20,6 @@ router.post("/text", textEmbeddings);
 router.get("/text-pair", pairTextWithEmbedding);
 router.get("/podcasts", podcastsTextEmbeddings);
 router.get("/semantic-search", semanticSearch);
+router.get("/chat-response", generateChatResponse);
 
 export default router;
