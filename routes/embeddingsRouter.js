@@ -2,6 +2,7 @@ import express from "express";
 import {
   pairTextWithEmbedding,
   podcastsTextEmbeddings,
+  semanticSearch,
   textEmbeddings,
 } from "../controllers/text-embeddings.js";
 const router = express.Router();
@@ -17,5 +18,6 @@ router.get("/", (req, res) => {
 router.post("/text", textEmbeddings);
 router.get("/text-pair", pairTextWithEmbedding);
 router.get("/podcasts", podcastsTextEmbeddings);
+router.get("/semantic-search", semanticSearch);
 
 export default router;

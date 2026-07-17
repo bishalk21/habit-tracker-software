@@ -15,9 +15,9 @@ A full-stack web application that allows users to record their dreams and receiv
 ## Tech Stack
 
 - **Backend**: Node.js, Express
-- **Database**: SQLite (better-sqlite3)
+- **Database**: SQLite (better-sqlite3), Supabase
 - **Frontend**: HTML, CSS, Vanilla JavaScript
-- **AI**: Anthropic Claude API
+- **AI**: Anthropic Claude API, OpenAI Embeddings API
 
 ## Project Structure
 

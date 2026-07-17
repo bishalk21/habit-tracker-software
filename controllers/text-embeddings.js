@@ -112,3 +112,43 @@ export async function podcastsTextEmbeddings(req, res) {
     });
   }
 }
+
+// Semantic search function
+export async function semanticSearch(req, res) {
+  try {
+    // const query = "Jammin' in the Big Easy";
+    const query = "Decoding Orca Calls";
+    if (!query) {
+      return res.status(400).json({ error: "Missing 'query' parameter" });
+    }
+    const embeddingResponse = await openai.embeddings.create({
+      model: "text-embedding-ada-002",
+      input: query,
+    });
+    const queryEmbedding = embeddingResponse.data[0].embedding;
+
+    //  query supabase for the nearest neighbors based on the embedding
+    const { data, error } = await supabase.rpc("match_documents", {
+      query_embedding: queryEmbedding,
+      match_threshold: 0.5,
+      match_count: 5,
+    });
+    if (error) {
+      console.error("Error performing semantic search:", error);
+      return res.status(500).json({
+        status: "error",
+        message: "Failed to perform semantic search",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+      data: data,
+    });
+  } catch (error) {
+    console.error("Error in semantic search:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to perform semantic search",
+    });
+  }
+}

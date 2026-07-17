@@ -54,3 +54,6 @@ Content-Type: application/json
 
 ### text embeddings for podcasts
 GET http://localhost:3001/api/embeddings/podcasts
+
+### semantic search
+GET http://localhost:3001/api/embeddings/semantic-search
