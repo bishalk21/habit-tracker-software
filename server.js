@@ -15,6 +15,7 @@ import {
 } from "./routes/huggingFace.js";
 import chatOllamaRouter from "./routes/chatOllamaRouter.js";
 import embeddingsRouter from "./routes/embeddingsRouter.js";
+import langChainRouter from "./routes/langChainRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -113,6 +114,7 @@ app.get("/api/generate-image", generateImage);
 // ollama practice
 app.use("/api/ollama", chatOllamaRouter);
 app.use("/api/embeddings", embeddingsRouter);
+app.use("/api/langchain", langChainRouter);
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {

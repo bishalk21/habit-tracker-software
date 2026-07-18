@@ -60,3 +60,9 @@ GET http://localhost:3001/api/embeddings/semantic-search
 
 ### Conversational response
 GET http://localhost:3001/api/embeddings/chat-response
+
+### langchain text splitter
+GET http://localhost:3001/api/langchain/split-text
+
+### chat langchain
+GET http://localhost:3001/api/langchain/chat-response

@@ -25,6 +25,16 @@
         <p class="subtitle">Record your dreams and discover their meanings.</p>
       </header>
 
+      <section class="chatbot">
+        <form>
+          <input type="text" placeholder="How can I help you today?" />
+          <button>
+            <span class="icon material-symbols-outlined">Send</span>
+          </button>
+        </form>
+        <p id="response"></p>
+      </section>
+
       <section class="container">
         <p id="status"></p>
         <button id="detect-objects" disabled>Detect Objects</button>
@@ -76,5 +86,6 @@
     </footer>
 
     <script type="module" src="app.js"></script>
+    <script type="module" src="chatbot.js"></script>
   </body>
 </html>
