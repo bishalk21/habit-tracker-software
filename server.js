@@ -16,6 +16,7 @@ import {
 import chatOllamaRouter from "./routes/chatOllamaRouter.js";
 import embeddingsRouter from "./routes/embeddingsRouter.js";
 import langChainRouter from "./routes/langChainRouter.js";
+import agentRouter from "./routes/agentRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -115,6 +116,7 @@ app.get("/api/generate-image", generateImage);
 app.use("/api/ollama", chatOllamaRouter);
 app.use("/api/embeddings", embeddingsRouter);
 app.use("/api/langchain", langChainRouter);
+app.use("/api/agent", agentRouter);
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {
