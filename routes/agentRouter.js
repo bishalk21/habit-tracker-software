@@ -1,5 +1,5 @@
 import express from "express";
-import { getWeatherAndActivitySuggestions } from "../agent/agent.js";
+import { getWeatherAndActivitySuggestions } from "../controllers/agentFunctions.js";
 const router = express.Router();
 
 router.get("/weather-activity", getWeatherAndActivitySuggestions);
