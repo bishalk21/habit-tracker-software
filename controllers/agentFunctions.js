@@ -49,31 +49,49 @@ You then output:
 Answer: <Suggested activities based on sunny weather that are highly specific to New York City and surrounding areas.>
 `;
 
-export async function getWeatherAndActivitySuggestions(req, res) {
-  try {
-    const location = await getLocation();
-    const weather = await getCurrentWeather();
-    const weatherResponse = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content:
-            "Give me the list of activities I can do based on my current location and weather. Here is the location: " +
-            location +
-            " and here is the weather: " +
-            weather,
-        },
-      ],
-    });
-    const activitySuggestions = weatherResponse.choices[0].message.content;
+const availableActions = {
+  getCurrentWeather: getCurrentWeather,
+  getLocation: getLocation,
+};
 
-    /**
-     * PLAN:
+export async function getWeatherAndActivitySuggestions(req, res) {
+  const messages = [
+    {
+      role: "system",
+      content: systemPrompt,
+    },
+    {
+      role: "user",
+      content:
+        "What are some activity ideas that I can do this afternoon based on my location and weather?",
+      // "Give me the list of activities I can do based on my current location and weather. Here is the location: " +
+      // location +
+      // " and here is the weather: " +
+      // weather,
+    },
+  ];
+
+  const iterationLimit = 5; // Limit the number of Thought-Action-Observation cycles
+  const actionRegex = /^Action:\s*(\w+):?\s*(.*)/;
+
+  try {
+    for (let i = 0; i < iterationLimit; i++) {
+      console.log(
+        `Iteration ${i + 1}: Sending messages to OpenAI for processing...`,
+      );
+      const weatherResponse = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: messages,
+      });
+      const responseText = weatherResponse.choices[0].message.content;
+      messages.push({
+        role: "assistant",
+        content: `${responseText}`,
+      });
+
+      console.log(responseText);
+      /**
+       * PLAN:
      * 1. Split the string on the newline character \n
      * 2. Search through the array of strings for one that has "Action:"
      *      - REGEX to use: /^Action: (\w+): (.*)$/
@@ -83,19 +101,41 @@ export async function getWeatherAndActivitySuggestions(req, res) {
      *      - This will give you the function name and the parameter (if any)
      * 3. Parse the action (function and parameter) from the string
      * 4. Calling the function
-     * 5. Add an "Obversation" message with the results of the function call
+     * 5. Add an "Observation" message with the results of the function call
      */
 
-    const responseLines = activitySuggestions.split("\n");
-    const actionRegex = /^Action:\s*(\w+):?\s*(.*)/;
-    const actionLine = responseLines.find((line) => actionRegex.test(line));
-    const actions = actionRegex.exec(actionLine); // exec returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
-    // const actions = actionLine.match(actionRegex); // match returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
+      const responseLines = responseText.split("\n");
+      const actionLine = responseLines.find((line) => actionRegex.test(line));
+      // const actions = actionRegex.exec(actionLine); // exec returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
+      // const actions = actionLine.match(actionRegex); // match returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
 
-    res.status(200).json({
-      status: "success",
-      data: actions,
-    });
+      if (actionLine) {
+        const actions = actionRegex["exec"](actionLine);
+        const [_, actionName, actionParam] = actions;
+        if (!availableActions.hasOwnProperty(actionName)) {
+          throw new Error(`Action ${actionName} is not available.`);
+        }
+        console.log(
+          `Executing action: ${actionName} with parameter: ${actionParam}`,
+        );
+        const observations = await availableActions[actionName](actionParam);
+        messages.push({
+          role: "assistant",
+          content: `Observation: ${observations}`,
+        });
+        console.log("Observation:", observations);
+      } else {
+        console.log(
+          "agent has finished processing. Final response:",
+          responseText,
+        );
+        res.status(200).json({
+          status: "success",
+          data: responseText,
+        });
+        return; // Exit the loop and function after final response
+      }
+    }
   } catch (error) {
     res.status(500).json({
       status: "error",
