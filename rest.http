@@ -69,3 +69,6 @@ GET http://localhost:3001/api/langchain/chat-response
 
 ### agent for weather and activity suggestions
 GET http://localhost:3001/api/agent/weather-activity
+
+### Agent for OpenAI Functions
+GET http://localhost:3001/api/agent/openai-function-agent

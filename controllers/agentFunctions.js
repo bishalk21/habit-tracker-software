@@ -105,7 +105,7 @@ export async function getWeatherAndActivitySuggestions(req, res) {
      */
 
       const responseLines = responseText.split("\n");
-      const actionLine = responseLines.find((line) => actionRegex.test(line));
+      const actionLine = responseLines.find((line) => actionRegex.test(line)); // Action: getLocation: null
       // const actions = actionRegex.exec(actionLine); // exec returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
       // const actions = actionLine.match(actionRegex); // match returns an array where the first element is the full match, the second is the function name, and the third is the parameter (if any)
 

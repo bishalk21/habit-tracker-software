@@ -4,8 +4,9 @@
  */
 import { openai } from "../utils/ai-openai.js";
 
-export async function getCurrentWeather() {
+export async function getCurrentWeather({ location }) {
   const weather = {
+    location: location,
     temperature: "72",
     unit: "F",
     forecast: "Sunny",
@@ -14,11 +15,13 @@ export async function getCurrentWeather() {
 }
 
 export async function getLocation() {
-  const location = {
-    city: "NSW",
-    country: "Australia",
-  };
-  return JSON.stringify(location);
+  try {
+    const response = await fetch("https://ipapi.co/8.8.8.8/country/");
+    const text = await response.json();
+    return JSON.stringify(text);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /**
