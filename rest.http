@@ -72,3 +72,6 @@ GET http://localhost:3001/api/agent/weather-activity
 
 ### Agent for OpenAI Functions
 GET http://localhost:3001/api/agent/openai-function-agent
+
+#### Context Engineering Stream
+GET http://localhost:3001/api/context-engineering/create-stream?query=in-100-words-explain-context-engineering

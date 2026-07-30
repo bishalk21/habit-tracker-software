@@ -25,6 +25,27 @@
         <p class="subtitle">Record your dreams and discover their meanings.</p>
       </header>
 
+      <div id="chat-section">
+        <h1>Context Engineering Chat</h1>
+        <main id="chat-container">
+          <div id="messages-container"></div>
+        </main>
+        <form id="chat-form">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Type a message..."
+            autocomplete="off"
+          />
+          <button type="submit" id="send-button" aria-label="Send message">
+            ↑
+          </button>
+        </form>
+        <div class="selector-container">
+          <select id="persona-selector"></select>
+        </div>
+      </div>
+
       <!-- Conversation Bubbles -->
       <section id="conversation" class="conversation-container">
         <article class="ai-message">
@@ -105,8 +126,8 @@
     <footer>
       <p>&copy; DreamCatcher. All rights reserved.</p>
     </footer>
-
     <script type="module" src="app.js"></script>
     <script type="module" src="chatbot.js"></script>
+    <script type="module" src="ce.js"></script>
   </body>
 </html>
