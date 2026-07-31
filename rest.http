@@ -74,4 +74,4 @@ GET http://localhost:3001/api/agent/weather-activity
 GET http://localhost:3001/api/agent/openai-function-agent
 
 #### Context Engineering Stream
-GET http://localhost:3001/api/context-engineering/create-stream?query=in-100-words-explain-context-engineering
+GET http://localhost:3001/api/context-engineering/create-stream?query=What%20is%20the%20meaning%20of%20life&persona=coach
