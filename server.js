@@ -18,6 +18,7 @@ import embeddingsRouter from "./routes/embeddingsRouter.js";
 import langChainRouter from "./routes/langChainRouter.js";
 import agentRouter from "./routes/agentRouter.js";
 import ceRouter from "./routes/ceRouter.js";
+import embeddingRouter from "./routes/embeddings/embeddingRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -119,6 +120,7 @@ app.use("/api/embeddings", embeddingsRouter);
 app.use("/api/langchain", langChainRouter);
 app.use("/api/agent", agentRouter);
 app.use("/api/context-engineering", ceRouter);
+app.use("/api/v1/embedding", embeddingRouter); // Use the embeddingRouter for embeddings routes
 
 // SHUTDOWN HANDLER
 app.get("/shutdown", async (req, res) => {

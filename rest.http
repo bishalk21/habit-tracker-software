@@ -75,3 +75,12 @@ GET http://localhost:3001/api/agent/openai-function-agent
 
 #### Context Engineering Stream
 GET http://localhost:3001/api/context-engineering/create-stream?query=What%20is%20the%20meaning%20of%20life&persona=coach
+
+### Embeddings recap
+GET http://localhost:3001/api/v1/embedding/get-embeddings
+
+### ingest documents into vector database
+POST http://localhost:3001/api/v1/embedding/ingest-documents
+
+### Retrieve similar documents from vector database
+GET http://localhost:3001/api/v1/embedding/retrieve-similar-documents
