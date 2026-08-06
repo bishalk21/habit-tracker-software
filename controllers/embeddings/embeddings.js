@@ -5,18 +5,27 @@ import fs from "fs";
 import { supabase } from "../../config/supabaseConfig.js";
 import {
   ANSWERING_MODEL_NAME,
+  CHUNK_OVERLAP,
+  CHUNK_SIZE,
   CLEAR_SUPABASE_TABLE_BEFORE_INSERT,
   EMBEDDING_MODEL_NAME,
+  MATCH_THRESHOLD,
   SIMILARITY_MATCH_COUNT,
   SOURCE_DOCUMENTS_DIR,
   SUPABASE_TABLE_NAME,
 } from "../../utils/constants.js";
 import { combineDocuments, getRagPrompt } from "./getRagPrompt.js";
+import { simpleTextSplitter } from "./simpleTextSplitter.js";
 
 // GET __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url); // Get the current file path
 const __dirname = path.dirname(__filename); // Get the directory name of the current file
 
+/**
+ * 1. get the source documents from the source directory (path.join(__dirname, SOURCE_DOCUMENTS_DIR))
+ * 2. read the content of each document (fs.readFileSync)
+ * 3.
+ */
 export async function ingestDocumentsAndGenerateEmbeddings(req, res) {
   const sourceDir = path.join(__dirname, SOURCE_DOCUMENTS_DIR); // Path to the directory containing source documents
   console.log(`Ingesting documents from: ${sourceDir}`);
@@ -67,19 +76,34 @@ export async function ingestDocumentsAndGenerateEmbeddings(req, res) {
       const fileContent = fs.readFileSync(filePath, "utf-8");
       console.log(`File content: ${fileContent}`);
       //   Generate embeddings for the file content
+
+      //   split the large text into chunks
+      const chunks = simpleTextSplitter(fileContent, CHUNK_SIZE, CHUNK_OVERLAP);
+
+      if (chunks.length === 0) {
+        console.log(`No chunks generated for file: ${file}`);
+        continue; // Skip to the next file if no chunks were generated
+      }
+
+      let fileChunkCount = 0;
       try {
-        const embeddings = await openai.embeddings.create({
-          model: EMBEDDING_MODEL_NAME,
-          input: fileContent,
-        });
-        // add metadata with source filename to the embeddings
-        const documentToInsert = {
-          content: fileContent,
-          embedding: embeddings.data[0].embedding,
-          metadata: { source: file }, // Store the source filename in metadata
-        };
-        allDocumentsToInsert.push(documentToInsert);
-        console.log(`- embedded content from file: ${file}`);
+        for (const chunk of chunks) {
+          fileChunkCount++;
+          const embeddings = await openai.embeddings.create({
+            model: EMBEDDING_MODEL_NAME,
+            input: chunk,
+          });
+          // add metadata with source filename to the embeddings
+          const documentToInsert = {
+            content: chunk,
+            embedding: embeddings.data[0].embedding,
+            metadata: { source: file }, // Store the source filename in metadata
+          };
+          allDocumentsToInsert.push(documentToInsert);
+          console.log(
+            `- embedded content from file: ${file}, ${documentToInsert.content}`,
+          );
+        }
       } catch (error) {
         console.error(
           `Error generating embeddings for file ${filePath}:`,
@@ -110,6 +134,7 @@ export async function ingestDocumentsAndGenerateEmbeddings(req, res) {
         `Successfully inserted documents into Supabase table '${SUPABASE_TABLE_NAME}'.`,
       );
     }
+    console.log(insertData);
     res.status(200).json({
       message: `Successfully ingested ${allDocumentsToInsert.length} documents and generated embeddings.`,
       insertedCount: allDocumentsToInsert.length,
@@ -125,7 +150,13 @@ export async function ingestDocumentsAndGenerateEmbeddings(req, res) {
       .json({ error: "Failed to ingest documents and generate embeddings" });
   }
 }
-
+/**
+ * 1. generate vector embeddings for user query using OpenAI embeddings API
+ * 2. retrieve similar documents from Supabase using the generated query embedding
+ * 3. create a prompt including context docs to send to the LLM for RAG
+ * 4. send the prompt to the LLM for RAG and get the response
+ * 5. return the response to the user
+ */
 export async function getEmbeddings(req, res) {
   const content = "The quick brown fox jumps over the lazy dog.";
   try {
@@ -142,7 +173,7 @@ export async function getEmbeddings(req, res) {
 }
 
 export async function retrieveSimilarDocuments(req, res) {
-  const query = "In 1843, what was the key milestone in computing?";
+  const query = "How many houses were damaged during the great fire of london?";
   try {
     const queryEmbedding = await openai.embeddings.create({
       model: EMBEDDING_MODEL_NAME,
@@ -155,6 +186,7 @@ export async function retrieveSimilarDocuments(req, res) {
       {
         query_embedding: embeddingVector,
         match_count: SIMILARITY_MATCH_COUNT,
+        match_threshold: MATCH_THRESHOLD,
       },
     );
 

@@ -84,3 +84,16 @@ POST http://localhost:3001/api/v1/embedding/ingest-documents
 
 ### Retrieve similar documents from vector database
 GET http://localhost:3001/api/v1/embedding/retrieve-similar-documents
+
+
+### Vercel AI SDK - generate response & create embeddings
+GET http://localhost:3001/api/vercel-ai-sdk/generate-response-and-embeddings
+
+### Vercel AI SDK - Generate Response
+GET http://localhost:3001/api/vercel-ai-sdk/generate-response
+
+### Vercel AI SDK - embeddings
+GET http://localhost:3001/api/vercel-ai-sdk/generate-embeddings
+
+### Vercel AI SDK - Structured Output
+GET http://localhost:3001/api/vercel-ai-sdk/generate-basic-structured-output

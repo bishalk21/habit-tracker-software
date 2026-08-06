@@ -9,6 +9,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^4.0.32",
     "@google/generative-ai": "^0.15.0",
     "@huggingface/inference": "^4.13.23",
     "@huggingface/transformers": "^4.2.0",
@@ -29,7 +30,8 @@
     "openai": "^4.52.0",
     "pg": "^8.11.3",
     "postgres": "^3.4.7",
-    "url": "^0.11.4"
+    "url": "^0.11.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

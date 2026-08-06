@@ -1,0 +1,129 @@
+{
+  "initialResponseMessages": [],
+  "steps": [
+    {
+      "callId": "call-0DNLfOcT7G91myMTX92szAXL",
+      "stepNumber": 0,
+      "model": {
+        "provider": "openai.responses",
+        "modelId": "gpt-4o"
+      },
+      "runtimeContext": {},
+      "toolsContext": {},
+      "content": [
+        {
+          "type": "text",
+          "text": "Sure! Here's a delicious homemade pizza recipe for you:\n\n### Homemade Margherita Pizza\n\n**Ingredients:**\n\n**For the Dough:**\n- 2 ¼ teaspoons (1 packet) active dry yeast\n- 1 ½ cups warm water (about 110°F or 45°C)\n- 3 ½ to 4 cups all-purpose flour\n- 2 tablespoons olive oil\n- 1 teaspoon salt\n- 1 teaspoon sugar\n\n**For the Sauce:**\n- 1 can (14 ounces) crushed tomatoes\n- 2 cloves garlic, minced\n- 1 tablespoon olive oil\n- 1 teaspoon dried oregano\n- Salt and pepper to taste\n\n**For the Topping:**\n- 8 ounces fresh mozzarella, sliced\n- 1/4 cup grated Parmesan cheese\n- Fresh basil leaves\n- Olive oil, for drizzling\n- Salt and pepper to taste\n\n**Instructions:**\n\n**1. Prepare the Dough:**\n   - In a bowl, combine warm water and sugar. Sprinkle yeast over the top and let it sit for about 5 minutes until foamy.\n   - Mix in olive oil and salt. Gradually add flour, incorporating it until the dough is smooth and elastic.\n   - Knead for about 8–10 minutes. Place in an oiled bowl, cover with a damp cloth, and let rise for 1 hour or until doubled in size.\n\n**2. Prepare the Sauce:**\n   - In a saucepan, heat olive oil over medium heat. Add minced garlic and sauté for about 30 seconds.\n   - Stir in crushed tomatoes and oregano. Season with salt and pepper.\n   - Let simmer for 15–20 minutes, then set aside to cool.\n\n**3. Assemble the Pizza:**\n   - Preheat your oven to 475°F (245°C) and place a pizza stone or baking sheet inside to heat.\n   - Punch down the risen dough and divide it into two equal parts. Roll out each part on a floured surface to your desired thickness.\n   - Transfer the dough to a parchment paper-lined pizza peel or another baking sheet.\n   - Spread a layer of sauce over the dough. Top with slices of mozzarella and sprinkle with Parmesan.\n\n**4. Bake the Pizza:**\n   - Carefully slide the prepared pizza onto the preheated stone or baking sheet.\n   - Bake for 10–15 minutes, until the crust is golden and the cheese is bubbling.\n\n**5. Garnish and Serve:**\n   - Remove pizza from the oven. Drizzle with olive oil and scatter fresh basil leaves on top.\n   - Season with a little salt and pepper, slice, and enjoy!\n\nFeel free to customize with additional toppings like sliced tomatoes, olives, or vegetables!",
+          "providerMetadata": {
+            "openai": {
+              "itemId": "msg_086d1a1cdf38061f006a745cee2df08198a7afa68b617aa47a"
+            }
+          }
+        }
+      ],
+      "finishReason": "stop",
+      "usage": {
+        "inputTokens": 12,
+        "inputTokenDetails": {
+          "noCacheTokens": 12,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0
+        },
+        "outputTokens": 560,
+        "outputTokenDetails": {
+          "textTokens": 560,
+          "reasoningTokens": 0
+        },
+        "totalTokens": 572,
+        "raw": {
+          "input_tokens": 12,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 560,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        }
+      },
+      "performance": {
+        "effectiveOutputTokensPerSecond": 64.69793395350695,
+        "effectiveTotalTokensPerSecond": 66.08431825251066,
+        "stepTimeMs": 8656.016699999998,
+        "responseTimeMs": 8655.608699999999,
+        "toolExecutionMs": {}
+      },
+      "warnings": [],
+      "request": {},
+      "response": {
+        "id": "resp_086d1a1cdf38061f006a745ced8388819888d62627d465bd48",
+        "timestamp": "2026-08-06T10:07:41.000Z",
+        "modelId": "gpt-4o-2024-08-06",
+        "headers": {
+          "access-control-expose-headers": "X-Request-ID, CF-Ray, CF-Ray",
+          "alt-svc": "h3=\":443\"; ma=86400",
+          "cf-cache-status": "DYNAMIC",
+          "cf-ray": "a26d3c69edebe7c2-SYD",
+          "connection": "keep-alive",
+          "content-encoding": "br",
+          "content-type": "application/json",
+          "date": "Thu, 06 Aug 2026 10:07:49 GMT",
+          "openai-organization": "user-4ht11sg1uc0qfhdxwbmqg4bp",
+          "openai-processing-ms": "8134",
+          "openai-project": "proj_pachEkiDdRSTCNltYOuncYh7",
+          "openai-version": "2020-10-01",
+          "server": "cloudflare",
+          "set-cookie": "__cf_bm=_DSBHexRXNU3RJ82QFbLGZODD80v.Li4aYcY8qPR6CI-1786010861.1083283-1.0.1.1-EyNzv18l1RVf.bgYIAYHI.dpHxCOWlGuT6Ad9a5mT1FQFnrjVdX6dJ0bvHbfUAYs6XHOO1ifLCTyCm8L79Rd7p.uG7r_UvaGRE_e_9q.b5sqdHVfSZoTbQUZRyFOI1Uq; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.openai.com; Expires=Thu, 06 Aug 2026 10:37:49 GMT",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "transfer-encoding": "chunked",
+          "x-content-type-options": "nosniff",
+          "x-ratelimit-limit-requests": "500",
+          "x-ratelimit-limit-tokens": "30000",
+          "x-ratelimit-remaining-requests": "499",
+          "x-ratelimit-remaining-tokens": "29969",
+          "x-ratelimit-reset-requests": "120ms",
+          "x-ratelimit-reset-tokens": "62ms",
+          "x-request-id": "req_d574694e2ca244aebae8fa8182fc23cb"
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "Sure! Here's a delicious homemade pizza recipe for you:\n\n### Homemade Margherita Pizza\n\n**Ingredients:**\n\n**For the Dough:**\n- 2 ¼ teaspoons (1 packet) active dry yeast\n- 1 ½ cups warm water (about 110°F or 45°C)\n- 3 ½ to 4 cups all-purpose flour\n- 2 tablespoons olive oil\n- 1 teaspoon salt\n- 1 teaspoon sugar\n\n**For the Sauce:**\n- 1 can (14 ounces) crushed tomatoes\n- 2 cloves garlic, minced\n- 1 tablespoon olive oil\n- 1 teaspoon dried oregano\n- Salt and pepper to taste\n\n**For the Topping:**\n- 8 ounces fresh mozzarella, sliced\n- 1/4 cup grated Parmesan cheese\n- Fresh basil leaves\n- Olive oil, for drizzling\n- Salt and pepper to taste\n\n**Instructions:**\n\n**1. Prepare the Dough:**\n   - In a bowl, combine warm water and sugar. Sprinkle yeast over the top and let it sit for about 5 minutes until foamy.\n   - Mix in olive oil and salt. Gradually add flour, incorporating it until the dough is smooth and elastic.\n   - Knead for about 8–10 minutes. Place in an oiled bowl, cover with a damp cloth, and let rise for 1 hour or until doubled in size.\n\n**2. Prepare the Sauce:**\n   - In a saucepan, heat olive oil over medium heat. Add minced garlic and sauté for about 30 seconds.\n   - Stir in crushed tomatoes and oregano. Season with salt and pepper.\n   - Let simmer for 15–20 minutes, then set aside to cool.\n\n**3. Assemble the Pizza:**\n   - Preheat your oven to 475°F (245°C) and place a pizza stone or baking sheet inside to heat.\n   - Punch down the risen dough and divide it into two equal parts. Roll out each part on a floured surface to your desired thickness.\n   - Transfer the dough to a parchment paper-lined pizza peel or another baking sheet.\n   - Spread a layer of sauce over the dough. Top with slices of mozzarella and sprinkle with Parmesan.\n\n**4. Bake the Pizza:**\n   - Carefully slide the prepared pizza onto the preheated stone or baking sheet.\n   - Bake for 10–15 minutes, until the crust is golden and the cheese is bubbling.\n\n**5. Garnish and Serve:**\n   - Remove pizza from the oven. Drizzle with olive oil and scatter fresh basil leaves on top.\n   - Season with a little salt and pepper, slice, and enjoy!\n\nFeel free to customize with additional toppings like sliced tomatoes, olives, or vegetables!",
+                "providerOptions": {
+                  "openai": {
+                    "itemId": "msg_086d1a1cdf38061f006a745cee2df08198a7afa68b617aa47a"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "providerMetadata": {
+        "openai": {
+          "responseId": "resp_086d1a1cdf38061f006a745ced8388819888d62627d465bd48",
+          "serviceTier": "default"
+        }
+      }
+    }
+  ],
+  "_output": "Sure! Here's a delicious homemade pizza recipe for you:\n\n### Homemade Margherita Pizza\n\n**Ingredients:**\n\n**For the Dough:**\n- 2 ¼ teaspoons (1 packet) active dry yeast\n- 1 ½ cups warm water (about 110°F or 45°C)\n- 3 ½ to 4 cups all-purpose flour\n- 2 tablespoons olive oil\n- 1 teaspoon salt\n- 1 teaspoon sugar\n\n**For the Sauce:**\n- 1 can (14 ounces) crushed tomatoes\n- 2 cloves garlic, minced\n- 1 tablespoon olive oil\n- 1 teaspoon dried oregano\n- Salt and pepper to taste\n\n**For the Topping:**\n- 8 ounces fresh mozzarella, sliced\n- 1/4 cup grated Parmesan cheese\n- Fresh basil leaves\n- Olive oil, for drizzling\n- Salt and pepper to taste\n\n**Instructions:**\n\n**1. Prepare the Dough:**\n   - In a bowl, combine warm water and sugar. Sprinkle yeast over the top and let it sit for about 5 minutes until foamy.\n   - Mix in olive oil and salt. Gradually add flour, incorporating it until the dough is smooth and elastic.\n   - Knead for about 8–10 minutes. Place in an oiled bowl, cover with a damp cloth, and let rise for 1 hour or until doubled in size.\n\n**2. Prepare the Sauce:**\n   - In a saucepan, heat olive oil over medium heat. Add minced garlic and sauté for about 30 seconds.\n   - Stir in crushed tomatoes and oregano. Season with salt and pepper.\n   - Let simmer for 15–20 minutes, then set aside to cool.\n\n**3. Assemble the Pizza:**\n   - Preheat your oven to 475°F (245°C) and place a pizza stone or baking sheet inside to heat.\n   - Punch down the risen dough and divide it into two equal parts. Roll out each part on a floured surface to your desired thickness.\n   - Transfer the dough to a parchment paper-lined pizza peel or another baking sheet.\n   - Spread a layer of sauce over the dough. Top with slices of mozzarella and sprinkle with Parmesan.\n\n**4. Bake the Pizza:**\n   - Carefully slide the prepared pizza onto the preheated stone or baking sheet.\n   - Bake for 10–15 minutes, until the crust is golden and the cheese is bubbling.\n\n**5. Garnish and Serve:**\n   - Remove pizza from the oven. Drizzle with olive oil and scatter fresh basil leaves on top.\n   - Season with a little salt and pepper, slice, and enjoy!\n\nFeel free to customize with additional toppings like sliced tomatoes, olives, or vegetables!",
+  "totalUsage": {
+    "inputTokens": 12,
+    "inputTokenDetails": {
+      "noCacheTokens": 12,
+      "cacheReadTokens": 0,
+      "cacheWriteTokens": 0
+    },
+    "outputTokens": 560,
+    "outputTokenDetails": {
+      "textTokens": 560,
+      "reasoningTokens": 0
+    },
+    "totalTokens": 572
+  }
+}
