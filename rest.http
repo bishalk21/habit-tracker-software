@@ -97,3 +97,6 @@ GET http://localhost:3001/api/vercel-ai-sdk/generate-embeddings
 
 ### Vercel AI SDK - Structured Output
 GET http://localhost:3001/api/vercel-ai-sdk/generate-basic-structured-output
+
+### Vercel ai sdk tool calling
+GET http://localhost:3001/api/vercel-ai-sdk/tool-calling
