@@ -100,3 +100,16 @@ GET http://localhost:3001/api/vercel-ai-sdk/generate-basic-structured-output
 
 ### Vercel ai sdk tool calling
 GET http://localhost:3001/api/vercel-ai-sdk/tool-calling
+
+### agentic retrieval routing - ingest documents
+GET http://localhost:3001/api/agent/ingest-docs
+
+### agentic retrieval routing - retrieve similar documents
+GET http://localhost:3001/api/agent/retrieve-similar-documents
+
+
+### basic retrieval
+GET http://localhost:3001/api/agent/basic-retrieval
+
+### agentic retrieval routing - classify and retrieve exercise
+GET http://localhost:3001/api/agent/agentic-retrieval
