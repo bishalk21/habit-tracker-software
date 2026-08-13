@@ -29,6 +29,6 @@ router.get("/generate-basic-structured-output", generateBasicStructuredOutput);
 router.get("/tool-calling", toolCalling);
 
 // web search agent route
-router.get("/web-search-agent", webSearchAgent);
+router.post("/web-search-agent/ask", webSearchAgent);
 
 export default router;

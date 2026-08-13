@@ -11,10 +11,11 @@ const retrievalQuery = "How do I access the scrimba discord?";
 const webSearchQuery = "What is the latest openai large language model?";
 
 export async function webSearchAgent(req, res) {
+  const { question } = req.body;
   try {
     // const { text, sources } = await webSearch(webSearchQuery);
     // res.json({ text, sources });
-    const response = await webSearchRetrievalAgent(webSearchQuery);
+    const response = await webSearchRetrievalAgent(question);
     res.json({
       response: response.text,
       answer: response.answer,
