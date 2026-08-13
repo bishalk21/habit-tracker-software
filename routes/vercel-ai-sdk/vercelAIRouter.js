@@ -9,6 +9,7 @@ import {
   basicWeatherToolCalling,
   toolCalling,
 } from "../../controllers/vercel-ai-sdk/vercel-ai-tool-calling.js";
+import { webSearchAgent } from "../../controllers/vercel-ai-sdk/web-search-ai-agent.js";
 const router = express.Router();
 
 // Route for generating a response and creating embeddings using the Vercel AI SDK
@@ -26,5 +27,8 @@ router.get("/generate-basic-structured-output", generateBasicStructuredOutput);
 
 // vercel ai sdk tool calling route
 router.get("/tool-calling", toolCalling);
+
+// web search agent route
+router.get("/web-search-agent", webSearchAgent);
 
 export default router;

@@ -9,3 +9,7 @@ export const CHUNK_SIZE = 2000; // Size of each text chunk for embeddings
 export const CHUNK_OVERLAP = 100; // Overlap between text chunks for embeddings
 
 export const OPENAI_MODEL_NAME = "gpt-4o"; // Use the appropriate model for AI tasks
+export const LLM_MODEL_NAME = "gpt-4o-mini"; // Use the appropriate model for AI tasks
+
+export const KNOWLEDGE_BASE_DESCRIPTION =
+  "Scrimba, an online platform for learning to code";

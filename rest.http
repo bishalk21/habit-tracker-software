@@ -113,3 +113,6 @@ GET http://localhost:3001/api/agent/basic-retrieval
 
 ### agentic retrieval routing - classify and retrieve exercise
 GET http://localhost:3001/api/agent/agentic-retrieval
+
+### web search agent
+GET http://localhost:3001/api/vercel-ai-sdk/web-search-agent
